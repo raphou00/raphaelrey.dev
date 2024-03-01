@@ -1,48 +1,25 @@
-"use client";
-
-import { useParams } from "next/navigation";
-import { useTransition } from "react";
-import { locales, defaultLocale, useRouter, usePathname } from "@/libs/navigation";
-import { cn } from "@/libs/utils";
+import { locales, defaultLocale } from "@/libs/navigation";
+import Link from "next/link";
 
 const LocaleSwitcher = () => {
-    const [isPending, startTransition] = useTransition();
-    const router = useRouter();
-    const pathname = usePathname();
-    const params = useParams();
-
-    function onSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-        const nextLocale = event.target.value;
-        startTransition(() => {
-            router.replace(
-                // @ts-expect-error
-                {pathname, params},
-                {locale: nextLocale}
-            );
-        });
-    }
-
     return (
-        <label
-            className={cn(
-                "relative text-gray-400",
-                isPending ? "transition-opacity [&:disabled]:opacity-30" : ""
-            )}
-        >
-            <select
-                className="inline-flex appearance-none bg-transparent py-3 pl-2 pr-6"
-                defaultValue={defaultLocale}
-                disabled={isPending}
-                onChange={onSelectChange}
+        <label className="relative text-gray-400">
+            <div
+                className="flex flex-col gap-2 appearance-none bg-transparent py-3 pl-2 pr-6"
             >
                 {
                     locales.map((cur: string) => (
-                        <option key={cur} value={cur}>
+                        <Link
+                            key={cur}
+                            href={"/" + cur}
+                            locale={cur}
+                            className="uppercase"
+                        >
                             {cur}
-                        </option>
+                        </Link>
                     ))
                 }
-            </select>
+            </div>
         </label>
     );
 }
