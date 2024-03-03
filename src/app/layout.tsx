@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { getLocale, getTranslations } from "next-intl/server";
-import "./globals.css";
 import LocaleSwitcher from "@/components/locale-switcher";
+import Providers from "./providers";
+import "./globals.css";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -17,7 +18,7 @@ const generateMetadata = async (): Promise<Metadata> => {
         title: t("title"),
         description: t("description"),
         keywords: "Raphaël Rey, Raphaël, Raphaël Rey Developer, Web Developer, Web Designer, Web Developer Portfolio, Web Designer Portfolio",
-        metadataBase: new URL("https://raphaelrey.dev"),
+        metadataBase: new URL(process.env.APP_URL!),
         icons: {
             icon: "/favicon.ico"
         },
@@ -33,7 +34,7 @@ const generateMetadata = async (): Promise<Metadata> => {
             title: t("title"),
             siteName: t("title"),
             description: t("description"),
-            url: "https://raphaelrey.dev",
+            url: process.env.APP_URL,
             locale: "en",
             images: [
                 {
@@ -52,13 +53,15 @@ const Root = async ({ children }: React.PropsWithChildren) => {
     return (
         <html lang={locale}>
             <body className={poppins.className}>
-                <div className="bg-black text-white overflow-hidden">
-                    <div className="fixed top-0 container mx-auto p-4">
-                        <div />
-                        <LocaleSwitcher />
+                <Providers locale={locale}>
+                    <div className="bg-black text-white overflow-hidden">
+                        <div className="fixed top-0 container mx-auto p-4">
+                            <div />
+                            <LocaleSwitcher />
+                        </div>
+                        {children}
                     </div>
-                    {children}
-                </div>
+                </Providers>
             </body>
         </html>
     );

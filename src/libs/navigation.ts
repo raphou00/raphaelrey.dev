@@ -1,6 +1,6 @@
 import { createLocalizedPathnamesNavigation } from "next-intl/navigation";
 
-export const locales = ["en", "fr", "de", "ru", "ja", "pl", "es", "ar", "ko"];
+export const locales = ["en", "fr", "de", "pt", "ru", "ja", "pl", "es", "ar", "ko"];
 
 export const defaultLocale = locales[0];
 
