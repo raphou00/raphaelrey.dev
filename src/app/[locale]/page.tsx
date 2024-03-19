@@ -20,7 +20,7 @@ const Page = async () => {
                 <div className="w-full max-w-72 aspect-square rounded-full group border-2 border-white overflow-hidden">
                     <Image
                         src="/raphaelrey.jpg"
-                        alt={t("title")}
+                        alt={t("title") + "-" + t("description")}
                         width={720}
                         height={720}
                         className=" w-full h-full transition duration-150 group-hover:hover:scale-105"

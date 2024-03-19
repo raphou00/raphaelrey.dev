@@ -1,11 +1,4 @@
 {
-    "pages": {
-        "home": "Home",
-        "checkout": "Checkout"
-    },
     "title": "Raphaël Rey",
-    "description": "I'm a web developer",
-    "pay": "Pay",
-    "success": "Success",
-    "error": "Something went wrong"
+    "description": "I'm a web developer"
 }

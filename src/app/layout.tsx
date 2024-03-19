@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { Poppins } from "next/font/google";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -12,13 +12,21 @@ const poppins = Poppins({
     weight: ["700"],
 });
 
+const viewport: Viewport = {
+    themeColor: "black",
+}
+
 const generateMetadata = async (): Promise<Metadata> => {
     const t = await getTranslations();
 
     return {
-        title: t("title"),
-        description: t("description"),
-        keywords: "Raphaël Rey, Raphaël, Raphaël Rey Developer, Web Developer, Web Designer, Web Developer Portfolio, Web Designer Portfolio",
+        title: "Raphaël Rey",
+        description: "I'm a web developer",
+        keywords: "Raphaël Rey, Raphaël, Raphaël Rey Dev, Web Developer, Web Designer, Web Developer Portfolio, Web Designer Portfolio",
+        applicationName: "Raphaël Rey",
+        publisher: "Raphaël Rey",
+        creator: "Raphaël Rey",
+        category: "Portfolio",
         metadataBase: new URL(process.env.APP_URL!),
         icons: {
             icon: "/favicon.ico",
@@ -34,9 +42,9 @@ const generateMetadata = async (): Promise<Metadata> => {
             }
         },
         openGraph: {
-            title: t("title"),
-            siteName: t("title"),
-            description: t("description"),
+            title: "Raphaël Rey",
+            siteName: "Raphaël Rey",
+            description: "I'm a web developer",
             url: process.env.APP_URL,
             locale: "en",
             images: [
@@ -49,16 +57,34 @@ const generateMetadata = async (): Promise<Metadata> => {
         },
         verification: {
             google: "kjV0bAjOmYliNutW_vKZ7Kv6e0bt9xjPxbhh3Mfp-ck"
+        },
+        alternates: {
+            canonical: "/",
+            languages: {
+                en: "/en",
+                ar: "/ar",
+                de: "/de",
+                es: "/es",
+                fr: "/fr",
+                ja: "/ja",
+                ko: "/ko",
+                pt: "/pt",
+                ru: "/ru",
+                pl: "/pl"
+            }
+        },
+        appleWebApp: {
+            title: "Raphaël Rey",
+            capable: true
         }
     };
 }
 
 const Root = async ({ children }: React.PropsWithChildren) => {
     const locale = await getLocale();
-    const t = await getTranslations("pages");
 
     return (
-        <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} data-theme="dark">
+        <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
             <body className={poppins.className}>
                 <Providers locale={locale}>
                     {children}
@@ -68,5 +94,5 @@ const Root = async ({ children }: React.PropsWithChildren) => {
     );
 }
 
-export { generateMetadata };
+export { generateMetadata, viewport };
 export default Root;
