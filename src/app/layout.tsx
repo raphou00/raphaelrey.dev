@@ -46,6 +46,9 @@ const generateMetadata = async (): Promise<Metadata> => {
                     height: 720
                 }
             ]
+        },
+        verification: {
+            google: "kjV0bAjOmYliNutW_vKZ7Kv6e0bt9xjPxbhh3Mfp-ck"
         }
     };
 }
