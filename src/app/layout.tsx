@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Poppins } from "next/font/google";
 import { getLocale, getTranslations } from "next-intl/server";
+import ThemeSwitcher from "@/components/theme-switcher";
 import LocaleSwitcher from "@/components/locale-switcher";
 import Providers from "./providers";
 import "./globals.css";
@@ -12,7 +14,6 @@ const poppins = Poppins({
 
 const generateMetadata = async (): Promise<Metadata> => {
     const t = await getTranslations();
-    const locale = await getLocale();
 
     return {
         title: t("title"),
@@ -20,7 +21,9 @@ const generateMetadata = async (): Promise<Metadata> => {
         keywords: "Raphaël Rey, Raphaël, Raphaël Rey Developer, Web Developer, Web Designer, Web Developer Portfolio, Web Designer Portfolio",
         metadataBase: new URL(process.env.APP_URL!),
         icons: {
-            icon: "/favicon.ico"
+            icon: "/favicon.ico",
+            shortcut: "/favicon-16x16.png",
+            apple: "/apple-touch-icon.png"
         },
         robots: {
             index: true,
@@ -49,18 +52,13 @@ const generateMetadata = async (): Promise<Metadata> => {
 
 const Root = async ({ children }: React.PropsWithChildren) => {
     const locale = await getLocale();
+    const t = await getTranslations("pages");
 
     return (
-        <html lang={locale}>
+        <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} data-theme="dark">
             <body className={poppins.className}>
                 <Providers locale={locale}>
-                    <div className="bg-black text-white overflow-hidden">
-                        <div className="fixed top-0 container mx-auto p-4">
-                            <div />
-                            <LocaleSwitcher />
-                        </div>
-                        {children}
-                    </div>
+                    {children}
                 </Providers>
             </body>
         </html>

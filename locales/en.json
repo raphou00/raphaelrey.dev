@@ -1,4 +1,11 @@
 {
+    "pages": {
+        "home": "Home",
+        "checkout": "Checkout"
+    },
     "title": "Raphaël Rey",
-    "description": "I'm a full-stack developer, and this is my portfolio"
+    "description": "I'm a web developer",
+    "pay": "Pay",
+    "success": "Success",
+    "error": "Something went wrong"
 }
