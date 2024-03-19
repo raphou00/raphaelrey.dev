@@ -16,7 +16,7 @@ const LocaleSwitcher = () => {
     }
 
     return (
-        <div className="dropdown dropdown-hover">
+        <div className="dropdown dropdown-hover  rtl:dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-sm uppercase font-bold">
                 <Globe2 />
                 {locale}
